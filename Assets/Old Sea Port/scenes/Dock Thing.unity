@@ -8637,6 +8637,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1727261982178584383, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c2ec326540250d043bd1ff41dd1b2fe9, type: 2}
     - target: {fileID: 4797491959656837153, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9201589
@@ -8687,7 +8691,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4797491959656837153, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 480937167}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6194483832847572377, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1333514171}
   m_SourcePrefab: {fileID: 100100000, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
 --- !u!4 &706166042 stripped
 Transform:
@@ -18007,6 +18014,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e5da93bf3ff477c4f8f88f51e419c805, type: 3}
   m_PrefabInstance: {fileID: 909232470}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1333514168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6194483832847572377, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+  m_PrefabInstance: {fileID: 706166041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1333514170 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1727261982178584383, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+  m_PrefabInstance: {fileID: 706166041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333514171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333514168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a9111a943de4e488519e8b903cbfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.5
+  sensitivity: 2
+  animator: {fileID: 1333514170}
+  isDead: 0
+  HP: 0
 --- !u!1001 &1333682297
 PrefabInstance:
   m_ObjectHideFlags: 0
