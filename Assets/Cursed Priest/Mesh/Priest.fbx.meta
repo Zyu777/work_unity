@@ -93,3 +93,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167606
+  packageName: Cursed Priest
+  packageVersion: 1.0
+  assetPath: Assets/Cursed Priest/Mesh/Priest.fbx
+  uploadId: 369212

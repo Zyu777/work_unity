@@ -1,59 +1,117 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaerCon : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float sensitivity;
+    [Header("Move")]
+    public float speed = 3.5f;
+    public float sensitivity = 2f;
+    public bool canMove = true;
+
+    [Header("Refs")]
     public Animator animator;
+    public ParticleSystem ps;
+
+    [Header("HP")]
+    public int HP = 20;
     public bool isDead;
 
-    public int HP;
-    // Start is called before the first frame update
+    [Header("Combat")]
+    public LayerMask enemyLayer;          // 记得勾选 Enemy Layer
+    public Transform attackOrigin;        // 不填就用自己
+    public float attackRadius = 1.0f;     // 攻击半径
+    public float normalAttackRange = 2.0f;
+    public int normalDamage = 2;
+    public float heavyAttackRange = 3.5f;
+    public int heavyDamage = 4;
+
+    [Header("Animator Params")]
+    public string attackTrigger = "Attack";
+    public string heavyAttackTrigger = "HeavyAttack";
+    public string chargingBool = "Charging";   // 右键蓄力用
+    public string hitTrigger = "Hit";
+    public string deadBool = "Dead";
+    public string moveXParam = "MoveX";
+    public string moveYParam = "MoveY";
+    public string moveStateParam = "MoveState";
+
+    [Header("Right Click Charge")]
+    public float chargeTime = 0.4f;   // 按住超过这个时间算“蓄力成功”
+    private float chargeTimer = 0f;
+    private bool holdingRight = false;
+    private bool charged = false;     // 是否已经蓄满（决定伤害/范围）
+
+    void Awake()
+    {
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (ps == null) ps = GetComponentInChildren<ParticleSystem>(true);
+        if (attackOrigin == null) attackOrigin = transform;
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        animator.SetFloat("MoveX", 0);
-        
+
+        if (ps != null)
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        // 避免Inspector忘记勾导致一直不能转向/打不到
+        if (!canMove) canMove = true;
+
+        // 确保初始不是蓄力状态
+        if (animator != null) animator.SetBool(chargingBool, false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isDead)
+        if (isDead) return;
+
+        // ✅ 新增：如果正在蓄力（Charging=true），禁止移动/转向
+        bool isChargingAnim = animator != null && animator.GetBool(chargingBool);
+        bool allowMoveNow = canMove && !isChargingAnim;
+
+        if (allowMoveNow)
         {
-            return;
+            Moveplayer();
+            RotatePlayer();
         }
-        Moveplayer();
-        RotatePlayer();
-        Attack();
+        else
+        {
+            // 可选：锁住移动时把移动参数归零，避免脚踩步/BlendTree乱动
+            if (animator != null)
+            {
+                animator.SetFloat(moveXParam, 0f);
+                animator.SetFloat(moveYParam, 0f);
+            }
+        }
+
+        Attack();        // 左键
+        HeavyAttack();   // 右键按住蓄力 + 松开释放（原逻辑保留）
     }
 
     private void Moveplayer()
     {
-        //获取玩家输入
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        animator.SetFloat("MoveX", horizontal);
-        animator.SetFloat("MoveY", vertical);
+
+        if (animator != null)
+        {
+            animator.SetFloat(moveXParam, horizontal);
+            animator.SetFloat(moveYParam, vertical);
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            animator.SetFloat("MoveState", 0);
+            if (animator != null) animator.SetFloat(moveStateParam, 0);
             speed = 1.5f;
         }
         else
         {
-            animator.SetFloat("MoveState", 1);
+            if (animator != null) animator.SetFloat(moveStateParam, 1);
             speed = 3.5f;
-
         }
-        
-        //Debug.Log("获取到的值："+horizontal+","+vertical);
-        //根据玩家的输入改变人物位置
-        //transform.position += new Vector3(horizontal, 0, vertical)*Time.deltaTime*speed;
-        Vector3 movement = new Vector3(horizontal, 0, vertical)*Time.deltaTime * speed;
-        transform.Translate(movement);
+
+        Vector3 movement = new Vector3(horizontal, 0, vertical) * Time.deltaTime * speed;
+        transform.Translate(movement, Space.Self);
     }
 
     private void RotatePlayer()
@@ -61,24 +119,116 @@ public class PlaerCon : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
         transform.Rotate(Vector3.up * mouseX);
     }
-    //攻击
-    private void Attack()
+
+    // 左键普攻（保留原样）
+    public void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        if (animator != null)
         {
-            animator.SetTrigger("Attack");
+            animator.ResetTrigger(attackTrigger);
+            animator.SetTrigger(attackTrigger);
+        }
+
+        DealDamageInFront(normalAttackRange, normalDamage);
+    }
+
+    // 右键：按住蓄力（Charging=true）-> 松开释放重击（Charging=false）
+    public void HeavyAttack()
+    {
+        // 右键按下：开始蓄力起手（进入Attack_Start）
+        if (Input.GetMouseButtonDown(1))
+        {
+            holdingRight = true;
+            chargeTimer = 0f;
+            charged = false;
+
+            if (animator != null)
+            {
+                animator.ResetTrigger(heavyAttackTrigger);
+                animator.SetTrigger(heavyAttackTrigger);
+
+                // 初始不蓄力
+                animator.SetBool(chargingBool, false);
+            }
+        }
+
+        // 右键按住：计时，超过阈值进入 Attack_Hold（Charging=true）
+        if (holdingRight && Input.GetMouseButton(1))
+        {
+            chargeTimer += Time.deltaTime;
+
+            if (!charged && chargeTimer >= chargeTime)
+            {
+                charged = true;
+
+                if (animator != null)
+                {
+                    animator.SetBool(chargingBool, true); // ✅ 进入蓄力
+                }
+            }
+        }
+
+        // 右键松开：结束蓄力（Charging=false）并结算伤害
+        if (holdingRight && Input.GetMouseButtonUp(1))
+        {
+            holdingRight = false;
+
+            if (animator != null)
+            {
+                animator.SetBool(chargingBool, false); // ✅ 松开就结束蓄力 -> 可以移动了（Update会放开）
+            }
+
+            // 原版：蓄满用重击，否则按普攻（你也可以改成“没蓄满不出招”）
+            float range = charged ? heavyAttackRange : normalAttackRange;
+            int dmg = charged ? heavyDamage : normalDamage;
+
+            DealDamageInFront(range, dmg);
+
+            // 重置
+            chargeTimer = 0f;
+            charged = false;
         }
     }
-    
-    //受伤
+
+    private void DealDamageInFront(float range, int damage)
+    {
+        Vector3 center = attackOrigin.position + transform.forward * (range * 0.6f);
+
+        Collider[] hits = Physics.OverlapSphere(center, attackRadius, enemyLayer, QueryTriggerInteraction.Ignore);
+        if (hits == null || hits.Length == 0) return;
+
+        foreach (var h in hits)
+        {
+            Transform root = h.transform.root;
+
+            root.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+            h.GetComponentInParent<Transform>().gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+
+            break; // 只打一个
+        }
+    }
+
     public void TakeDamage(int attackValue)
     {
+        if (isDead) return;
+
         HP -= attackValue;
-        animator.SetTrigger("Hit");
+
+        if (animator != null) animator.SetTrigger(hitTrigger);
+        if (ps != null) ps.Play();
+
         if (HP <= 0)
         {
-            animator.SetTrigger("Dead");
             isDead = true;
+            if (animator != null) animator.SetBool(deadBool, true);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackOrigin == null) return;
+        Gizmos.DrawWireSphere(attackOrigin.position + transform.forward * (normalAttackRange * 0.6f), attackRadius);
     }
 }
