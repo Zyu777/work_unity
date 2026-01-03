@@ -9003,6 +9003,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1427928679678644787, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427928679678644787, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 1727261982178584383, guid: 6c9b8c8158f9ca14ea0501da4e56006e, type: 3}
       propertyPath: m_Controller
       value: 
@@ -18395,6 +18403,9 @@ MonoBehaviour:
   attackTrigger: Attack
   heavyAttackTrigger: HeavyAttack
   chargingBool: Charging
+  chargedBool: Charged
+  releaseHeavyTrigger: ReleaseHeavy
+  cancelHeavyTrigger: CancelHeavy
   hitTrigger: Hit
   deadBool: Dead
   moveXParam: MoveX

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
 
     [Header("Combat")]
-    public LayerMask enemyLayer;          // 记得勾选 Enemy Layer
-    public Transform attackOrigin;        // 不填就用自己
-    public float attackRadius = 1.0f;     // 攻击半径
+    public LayerMask enemyLayer;
+    public Transform attackOrigin;
+    public float attackRadius = 1.0f;
     public float normalAttackRange = 2.0f;
     public int normalDamage = 2;
     public float heavyAttackRange = 3.5f;
@@ -26,8 +27,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animator Params")]
     public string attackTrigger = "Attack";
-    public string heavyAttackTrigger = "HeavyAttack";
-    public string chargingBool = "Charging";   // 右键蓄力用
+
+    public string heavyAttackTrigger = "HeavyAttack";     // Down: Locomotion -> Attack_Start
+    public string chargingBool = "Charging";              // Hold: true
+    public string chargedBool = "Charged";                // 蓄满标记（建议不要当硬过渡条件）
+    public string releaseHeavyTrigger = "ReleaseHeavy";   // Up(蓄满): Attack_Hold -> HeavyAttack
+    public string cancelHeavyTrigger = "CancelHeavy";     // Up(未蓄满)/打断：回Locomotion
+
     public string hitTrigger = "Hit";
     public string deadBool = "Dead";
     public string moveXParam = "MoveX";
@@ -35,10 +41,13 @@ public class PlayerController : MonoBehaviour
     public string moveStateParam = "MoveState";
 
     [Header("Right Click Charge")]
-    public float chargeTime = 0.4f;   // 按住超过这个时间算“蓄力成功”
+    public float chargeTime = 0.4f;
     private float chargeTimer = 0f;
     private bool holdingRight = false;
-    private bool charged = false;     // 是否已经蓄满（决定伤害/范围）
+    private bool charged = false;
+
+    private Coroutine clearChargedCo;
+    private Coroutine safetyCo;
 
     void Awake()
     {
@@ -54,20 +63,17 @@ public class PlayerController : MonoBehaviour
         if (ps != null)
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-        // 避免Inspector忘记勾导致一直不能转向/打不到
         if (!canMove) canMove = true;
 
-        // 确保初始不是蓄力状态
-        if (animator != null) animator.SetBool(chargingBool, false);
+        ResetChargeState();
     }
 
     void Update()
     {
         if (isDead) return;
 
-        // ✅ 新增：如果正在蓄力（Charging=true），禁止移动/转向
-        bool isChargingAnim = animator != null && animator.GetBool(chargingBool);
-        bool allowMoveNow = canMove && !isChargingAnim;
+        bool lockByAnim = IsAnimatorInHeavyStates() || (animator != null && animator.GetBool(chargingBool));
+        bool allowMoveNow = canMove && !lockByAnim;
 
         if (allowMoveNow)
         {
@@ -76,7 +82,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // 可选：锁住移动时把移动参数归零，避免脚踩步/BlendTree乱动
             if (animator != null)
             {
                 animator.SetFloat(moveXParam, 0f);
@@ -84,8 +89,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Attack();        // 左键
-        HeavyAttack();   // 右键按住蓄力 + 松开释放（原逻辑保留）
+        Attack();
+        HeavyAttack();
     }
 
     private void Moveplayer()
@@ -120,10 +125,12 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    // 左键普攻（保留原样）
     public void Attack()
     {
         if (!Input.GetMouseButtonDown(0)) return;
+
+        if (holdingRight || IsAnimatorInHeavyStates())
+            CancelCharge();
 
         if (animator != null)
         {
@@ -134,27 +141,31 @@ public class PlayerController : MonoBehaviour
         DealDamageInFront(normalAttackRange, normalDamage);
     }
 
-    // 右键：按住蓄力（Charging=true）-> 松开释放重击（Charging=false）
     public void HeavyAttack()
     {
-        // 右键按下：开始蓄力起手（进入Attack_Start）
+        // Down：起手
         if (Input.GetMouseButtonDown(1))
         {
             holdingRight = true;
             chargeTimer = 0f;
             charged = false;
 
+            StopSafetyCoroutines();
+
             if (animator != null)
             {
+                animator.SetBool(chargingBool, false);
+                animator.SetBool(chargedBool, false);
+
+                animator.ResetTrigger(releaseHeavyTrigger);
+                animator.ResetTrigger(cancelHeavyTrigger);
+
                 animator.ResetTrigger(heavyAttackTrigger);
                 animator.SetTrigger(heavyAttackTrigger);
-
-                // 初始不蓄力
-                animator.SetBool(chargingBool, false);
             }
         }
 
-        // 右键按住：计时，超过阈值进入 Attack_Hold（Charging=true）
+        // Hold：达到阈值进入蓄力
         if (holdingRight && Input.GetMouseButton(1))
         {
             chargeTimer += Time.deltaTime;
@@ -165,31 +176,129 @@ public class PlayerController : MonoBehaviour
 
                 if (animator != null)
                 {
-                    animator.SetBool(chargingBool, true); // ✅ 进入蓄力
+                    animator.SetBool(chargingBool, true);
+                    animator.SetBool(chargedBool, true);
                 }
             }
         }
 
-        // 右键松开：结束蓄力（Charging=false）并结算伤害
+        // Up：未蓄满取消；蓄满释放
         if (holdingRight && Input.GetMouseButtonUp(1))
         {
             holdingRight = false;
 
-            if (animator != null)
+            // 未蓄满：取消回Locomotion
+            if (!charged)
             {
-                animator.SetBool(chargingBool, false); // ✅ 松开就结束蓄力 -> 可以移动了（Update会放开）
+                CancelCharge();
+                return;
             }
 
-            // 原版：蓄满用重击，否则按普攻（你也可以改成“没蓄满不出招”）
-            float range = charged ? heavyAttackRange : normalAttackRange;
-            int dmg = charged ? heavyDamage : normalDamage;
+            // 蓄满：释放重击
+            if (animator != null)
+            {
+                // 关键：不要同帧把 Charged 清掉，让过渡稳定吃到
+                animator.SetBool(chargingBool, false);
+                animator.SetBool(chargedBool, true);
 
-            DealDamageInFront(range, dmg);
+                animator.ResetTrigger(cancelHeavyTrigger);
+                animator.ResetTrigger(releaseHeavyTrigger);
+                animator.SetTrigger(releaseHeavyTrigger);
+            }
 
-            // 重置
+            // 伤害结算（更建议用动画事件命中帧结算）
+            DealDamageInFront(heavyAttackRange, heavyDamage);
+
             chargeTimer = 0f;
             charged = false;
+
+            // ✅延迟清理 Charged（解决你“松开卡Hold/再点没反应”）
+            clearChargedCo = StartCoroutine(ClearChargedAfterDelay(0.15f));
+
+            // ✅保险：如果 0.25s 后还在 Hold，就强制 CancelHeavy 回去（防止任何配置问题导致卡死）
+            safetyCo = StartCoroutine(SafetyExitIfStuck(0.25f));
         }
+    }
+
+    private IEnumerator ClearChargedAfterDelay(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (animator != null) animator.SetBool(chargedBool, false);
+        clearChargedCo = null;
+    }
+
+    private IEnumerator SafetyExitIfStuck(float t)
+    {
+        yield return new WaitForSeconds(t);
+
+        // 如果仍然在 Attack_Hold，就说明 ReleaseHeavy 没被吃到，强制回 Locomotion
+        if (animator != null)
+        {
+            var s = animator.GetCurrentAnimatorStateInfo(0);
+            if (s.IsName("Attack_Hold"))
+            {
+                animator.SetBool(chargingBool, false);
+                animator.SetBool(chargedBool, false);
+                animator.ResetTrigger(cancelHeavyTrigger);
+                animator.SetTrigger(cancelHeavyTrigger);
+            }
+        }
+
+        safetyCo = null;
+    }
+
+    private void StopSafetyCoroutines()
+    {
+        if (clearChargedCo != null) { StopCoroutine(clearChargedCo); clearChargedCo = null; }
+        if (safetyCo != null) { StopCoroutine(safetyCo); safetyCo = null; }
+    }
+
+    private void CancelCharge()
+    {
+        StopSafetyCoroutines();
+
+        holdingRight = false;
+        charged = false;
+        chargeTimer = 0f;
+
+        if (animator != null)
+        {
+            animator.SetBool(chargingBool, false);
+            animator.SetBool(chargedBool, false);
+
+            animator.ResetTrigger(releaseHeavyTrigger);
+            animator.ResetTrigger(cancelHeavyTrigger);
+            animator.SetTrigger(cancelHeavyTrigger);
+        }
+    }
+
+    private void ResetChargeState()
+    {
+        StopSafetyCoroutines();
+
+        holdingRight = false;
+        charged = false;
+        chargeTimer = 0f;
+
+        if (animator != null)
+        {
+            animator.SetBool(chargingBool, false);
+            animator.SetBool(chargedBool, false);
+            animator.ResetTrigger(releaseHeavyTrigger);
+            animator.ResetTrigger(cancelHeavyTrigger);
+        }
+    }
+
+    private bool IsAnimatorInHeavyStates()
+    {
+        if (animator == null) return false;
+
+        var cur = animator.GetCurrentAnimatorStateInfo(0);
+        var next = animator.GetNextAnimatorStateInfo(0);
+
+        bool curIn = cur.IsName("Attack_Start") || cur.IsName("Attack_Hold") || cur.IsName("HeavyAttack");
+        bool nextIn = next.IsName("Attack_Start") || next.IsName("Attack_Hold") || next.IsName("HeavyAttack");
+        return curIn || nextIn;
     }
 
     private void DealDamageInFront(float range, int damage)
@@ -199,20 +308,16 @@ public class PlayerController : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(center, attackRadius, enemyLayer, QueryTriggerInteraction.Ignore);
         if (hits == null || hits.Length == 0) return;
 
-        foreach (var h in hits)
-        {
-            Transform root = h.transform.root;
-
-            root.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-            h.GetComponentInParent<Transform>().gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-
-            break; // 只打一个
-        }
+        Transform root = hits[0].transform.root;
+        root.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
     }
 
     public void TakeDamage(int attackValue)
     {
         if (isDead) return;
+
+        if (holdingRight || IsAnimatorInHeavyStates())
+            CancelCharge();
 
         HP -= attackValue;
 
@@ -223,6 +328,7 @@ public class PlayerController : MonoBehaviour
         {
             isDead = true;
             if (animator != null) animator.SetBool(deadBool, true);
+            ResetChargeState();
         }
     }
 
