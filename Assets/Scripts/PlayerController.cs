@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement; // ✅ 加载场景需要
 
 public class PlayerController : MonoBehaviour
 {
@@ -82,6 +83,14 @@ public class PlayerController : MonoBehaviour
     private float inputV;
     private float mouseX;
 
+    // =========================
+    // ✅ Death -> UI Scene
+    // =========================
+    [Header("Death -> UI Scene")]
+    public float deathToUISceneDelay = 3f;
+    public string deathSceneName = "DeathScene";
+    private bool deathSceneLoading = false;
+
     void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
@@ -101,6 +110,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         if (ps != null)
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -288,7 +298,6 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return true;
         var cur = animator.GetCurrentAnimatorStateInfo(0);
-        // 只看当前层0
         return cur.IsName(stateName);
     }
 
@@ -461,7 +470,25 @@ public class PlayerController : MonoBehaviour
             isDead = true;
             if (animator != null) animator.SetBool(deadBool, true);
             ResetChargeState();
+
+            // ✅ 死亡后解锁鼠标（UI用）
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            // ✅ 3秒后进入 DeathScene
+            if (!deathSceneLoading)
+                StartCoroutine(CoLoadDeathSceneAfterDelay());
         }
+    }
+
+    // ✅ 死亡后延迟加载 UI 场景
+    private IEnumerator CoLoadDeathSceneAfterDelay()
+    {
+        deathSceneLoading = true;
+        yield return new WaitForSeconds(deathToUISceneDelay);
+
+        if (!string.IsNullOrEmpty(deathSceneName))
+            SceneManager.LoadScene(deathSceneName);
     }
 
     public bool Heal(int amount)

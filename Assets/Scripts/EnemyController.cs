@@ -30,11 +30,12 @@ public class EnemyController : MonoBehaviour
     public Transform attackOrigin;             // 空则用 transform
     public float hitRadius = 0.6f;
     public float hitForwardOffset = 0.8f;
-    public LayerMask playerLayer;
+    public LayerMask playerLayer;              // 只检测 Player Layer
     public bool requireFacing = true;
     [Range(0f, 180f)] public float facingAngle = 70f;
 
-    private bool attackArmed = false;          // 本次攻击是否允许结算（防抬手就伤害/防多次伤害）
+    // ✅ 攻击结算门闩：建议由动画事件开启/关闭
+    private bool attackArmed = false;
 
     [Header("Animator Params")]
     public string attackTrigger = "Attack";
@@ -56,6 +57,9 @@ public class EnemyController : MonoBehaviour
         if (attackOrigin == null) attackOrigin = transform;
 
         TryFindTarget(force: true);
+
+        // ✅ 防呆：LayerMask 没配时，尽量自动推断 Player Layer
+        AutoFixPlayerLayerMaskIfNeeded();
     }
 
     void Start()
@@ -91,7 +95,7 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // NavMesh 安全：不在 NavMesh 上就尝试贴合
+        // NavMesh 安全
         if (agent != null && agent.enabled && !agent.isOnNavMesh)
         {
             EnsureOnNavMesh();
@@ -103,7 +107,9 @@ public class EnemyController : MonoBehaviour
         float dis = Vector3.Distance(target.transform.position, transform.position);
 
         // =========================
-        // 攻击范围内：只播动画，命中帧由 AnimEvent_AttackHit() 扣血
+        // 攻击范围内：只触发攻击动画
+        // 命中/结算完全交给动画事件：
+        //   AnimEvent_AttackStart / AnimEvent_AttackHit / AnimEvent_AttackEnd
         // =========================
         if (dis <= attackRange)
         {
@@ -113,9 +119,10 @@ public class EnemyController : MonoBehaviour
             if (Time.time - lastAttackTime >= attackCD)
             {
                 if (animator != null) animator.SetTrigger(attackTrigger);
-
-                attackArmed = true;
                 lastAttackTime = Time.time;
+
+                // ⚠️ 不建议在这里直接 attackArmed=true（容易和动画不同步）
+                // attackArmed = true;  // 改为由 AnimEvent_AttackStart 开启
             }
 
             UpdateMoveAnim();
@@ -150,16 +157,29 @@ public class EnemyController : MonoBehaviour
         UpdateMoveAnim();
     }
 
-    // =========================
-    // Animation Event：命中帧调用
-    // =========================
-    public void AnimEvent_AttackHit()
+    // =========================================================
+    // ✅ Animation Events（强烈推荐你在攻击动画里加）
+    // =========================================================
+
+    // ✅ 攻击开始帧：建议在抬手/出招起始那一帧加事件
+    public void AnimEvent_AttackStart()
     {
         if (isDead) return;
-        if (!attackArmed) return;
+        attackArmed = true;
+    }
+
+    // ✅ 命中帧：挥到人的那一下
+    public void AnimEvent_AttackHit()
+    {
+        // Debug：你需要时可以打开
+        // Debug.Log($"[Enemy] AnimEvent_AttackHit fired on {name}, attackArmed={attackArmed}");
+
+        if (isDead) return;
+        if (!attackArmed) return; // 没开窗就不结算
         if (target == null || target.isDead) return;
 
-        attackArmed = false; // 防止一次攻击多个命中事件
+        // 命中后立刻关闭，防止同一攻击多次触发
+        attackArmed = false;
 
         // 可选：面向判定（避免背对也打到）
         if (requireFacing)
@@ -174,34 +194,42 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        Vector3 center = attackOrigin.position + transform.forward * hitForwardOffset;
+        AutoFixPlayerLayerMaskIfNeeded();
 
-        // 命中球判定：只打 Player Layer
+        Vector3 originPos = (attackOrigin != null) ? attackOrigin.position : transform.position;
+        Vector3 center = originPos + transform.forward * hitForwardOffset;
+
         Collider[] cols = Physics.OverlapSphere(center, hitRadius, playerLayer, QueryTriggerInteraction.Ignore);
         if (cols == null || cols.Length == 0) return;
 
         // 保险：确保确实是当前 target（避免同 layer 其他东西误伤）
-        bool hitTarget = false;
         for (int i = 0; i < cols.Length; i++)
         {
             if (cols[i] == null) continue;
-            if (cols[i].GetComponentInParent<PlayerController>() == target)
+            var pc = cols[i].GetComponentInParent<PlayerController>();
+            if (pc != null && pc == target)
             {
-                hitTarget = true;
-                break;
+                target.TakeDamage(damageToPlayer);
+                return;
             }
         }
-        if (!hitTarget) return;
-
-        target.TakeDamage(damageToPlayer);
     }
 
-    // 可选：动画结束调用，保险清理
+    // ✅ 攻击结束帧（可选）：在动画最后一帧加，保险清理
     public void AnimEvent_AttackEnd()
     {
         attackArmed = false;
     }
 
+    // ✅ 兼容旧动画事件名（你之前报错的 NormalHit）
+    public void AnimEvent_NormalHit()
+    {
+        AnimEvent_AttackHit();
+    }
+
+    // =========================================================
+    // Damage / Die / Drop
+    // =========================================================
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -239,6 +267,9 @@ public class EnemyController : MonoBehaviour
         Instantiate(healthPackPrefab, transform.position + dropOffset, Quaternion.identity);
     }
 
+    // =========================================================
+    // Helpers
+    // =========================================================
     private void StopMove()
     {
         if (agent == null || !agent.enabled) return;
@@ -287,7 +318,6 @@ public class EnemyController : MonoBehaviour
     {
         if (agent == null || !agent.enabled) return;
 
-        // 如果不在 NavMesh 上，把自己 warp 到最近的 NavMesh
         if (!agent.isOnNavMesh)
         {
             if (NavMesh.SamplePosition(transform.position, out var hit, 5f, NavMesh.AllAreas))
@@ -297,12 +327,35 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // ✅ 如果 LayerMask 没配（value==0），尝试自动推断 Player Layer
+    private void AutoFixPlayerLayerMaskIfNeeded()
+    {
+        if (playerLayer.value != 0) return;
+
+        // 优先从 target 的 Layer 推断
+        if (target != null)
+        {
+            int layer = target.gameObject.layer;
+            if (layer >= 0 && layer <= 31)
+            {
+                playerLayer = 1 << layer;
+                return;
+            }
+        }
+
+        // 否则尝试按名字找 Layer
+        int playerLayerIndex = LayerMask.NameToLayer("Player");
+        if (playerLayerIndex >= 0)
+        {
+            playerLayer = 1 << playerLayerIndex;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
-        if (attackOrigin == null) return;
-
+        Transform o = attackOrigin != null ? attackOrigin : transform;
         Gizmos.DrawWireSphere(
-            attackOrigin.position + transform.forward * hitForwardOffset,
+            o.position + transform.forward * hitForwardOffset,
             hitRadius
         );
     }

@@ -31,7 +31,8 @@ public class BossController : MonoBehaviour
     public bool requireFacing = true;          // 需要面向玩家
     [Range(0f, 180f)] public float facingAngle = 80f;
 
-    private bool attackArmed = false;          // ✅ 本次攻击是否允许结算（防抬手就伤害/防多次伤害）
+    // ✅ 本次攻击是否允许结算（建议由动画事件 AttackStart/End 控制）
+    private bool attackArmed = false;
 
     [Header("Animator Params")]
     public string attackTrigger = "Attack";
@@ -93,6 +94,8 @@ public class BossController : MonoBehaviour
             var cam = Camera.main;
             if (cam != null) cameraShake = cam.GetComponent<CameraShake>();
         }
+
+        AutoFixPlayerLayerMaskIfNeeded();
     }
 
     void Start()
@@ -104,6 +107,10 @@ public class BossController : MonoBehaviour
         {
             agent.stoppingDistance = attackRange;
             agent.isStopped = false;
+
+            // 你如果需要 boss 自动转向，可以保留 agent.updateRotation=true
+            // 若你想自己 FaceTarget，建议关掉避免抢转向
+            agent.updateRotation = false;
         }
     }
 
@@ -135,7 +142,11 @@ public class BossController : MonoBehaviour
 
         float dis = Vector3.Distance(target.transform.position, transform.position);
 
-        // 攻击范围内：播放攻击动画（不在这里扣血）
+        // =========================
+        // 攻击范围内：只触发攻击动画
+        // 命中结算交给动画事件：
+        //   AnimEvent_AttackStart / AnimEvent_AttackHit / AnimEvent_AttackEnd
+        // =========================
         if (dis <= attackRange)
         {
             StopMove();
@@ -144,16 +155,19 @@ public class BossController : MonoBehaviour
             if (Time.time - lastAttackTime >= attackCD)
             {
                 if (animator != null) animator.SetTrigger(attackTrigger);
-
-                attackArmed = true;          // ✅ 允许本次攻击在命中帧结算
                 lastAttackTime = Time.time;
+
+                // ⚠️ 不建议在这里直接 attackArmed=true（容易与动画不同步）
+                // attackArmed = true; // 改为由 AnimEvent_AttackStart 开启
             }
 
             UpdateMoveAnim();
             return;
         }
 
+        // =========================
         // 追击
+        // =========================
         if (dis <= chaseRange)
         {
             if (agent != null && agent.enabled)
@@ -166,6 +180,7 @@ public class BossController : MonoBehaviour
                     agent.SetDestination(target.transform.position);
             }
 
+            FaceTarget(target.transform.position);
             UpdateMoveAnim();
             return;
         }
@@ -174,22 +189,33 @@ public class BossController : MonoBehaviour
         UpdateMoveAnim();
     }
 
-    // =========================
-    // Animation Event：攻击命中帧（把它加在 Boss Attack 动画挥到那一帧）
-    // =========================
+    // =========================================================
+    // ✅ Animation Events（你现在动画里加了 AttackStart，所以 Boss 必须有）
+    // =========================================================
+
+    // ✅ 攻击开始帧（抬手那一帧）
+    public void AnimEvent_AttackStart()
+    {
+        if (isDead) return;
+        attackArmed = true;
+    }
+
+    // ✅ 攻击命中帧（挥到那一下）
     public void AnimEvent_AttackHit()
     {
         if (isDead) return;
         if (!attackArmed) return;
         if (target == null || target.isDead) return;
 
-        attackArmed = false; // 防止多次命中帧事件
+        // 命中后立刻关闭，防止同一次攻击多次结算
+        attackArmed = false;
 
         // 面向判定（可选）
         if (requireFacing)
         {
             Vector3 toPlayer = target.transform.position - transform.position;
             toPlayer.y = 0f;
+
             if (toPlayer.sqrMagnitude > 0.0001f)
             {
                 float ang = Vector3.Angle(transform.forward, toPlayer.normalized);
@@ -197,24 +223,42 @@ public class BossController : MonoBehaviour
             }
         }
 
-        // 命中球判定
-        Vector3 center = attackOrigin.position + transform.forward * hitForwardOffset;
+        AutoFixPlayerLayerMaskIfNeeded();
+
+        Vector3 originPos = (attackOrigin != null) ? attackOrigin.position : transform.position;
+        Vector3 center = originPos + transform.forward * hitForwardOffset;
+
         Collider[] cols = Physics.OverlapSphere(center, hitRadius, playerLayer, QueryTriggerInteraction.Ignore);
         if (cols == null || cols.Length == 0) return;
 
-        // 命中才扣血（Player 会处理无敌/僵直）
-        target.TakeDamage(damageToPlayer);
+        // 保险：只对玩家扣血（避免场景里其它同 layer 物体误触）
+        for (int i = 0; i < cols.Length; i++)
+        {
+            if (cols[i] == null) continue;
+            PlayerController pc = cols[i].GetComponentInParent<PlayerController>();
+            if (pc != null && pc == target)
+            {
+                target.TakeDamage(damageToPlayer);
+                return;
+            }
+        }
     }
 
-    // 可选：在动画结束处加 event，保险清理
+    // ✅ 攻击结束帧（可选）
     public void AnimEvent_AttackEnd()
     {
         attackArmed = false;
     }
 
-    // =========================
+    // ✅ 兼容旧事件名（如果动画里还有 NormalHit）
+    public void AnimEvent_NormalHit()
+    {
+        AnimEvent_AttackHit();
+    }
+
+    // =========================================================
     // Take Damage / Phase2
-    // =========================
+    // =========================================================
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -329,9 +373,9 @@ public class BossController : MonoBehaviour
         r.materials = mats;
     }
 
-    // =========================
+    // =========================================================
     // Die / Drop
-    // =========================
+    // =========================================================
     private void Die()
     {
         if (isDead) return;
@@ -357,9 +401,9 @@ public class BossController : MonoBehaviour
         Instantiate(healthPackPrefab, transform.position + dropOffset, Quaternion.identity);
     }
 
-    // =========================
+    // =========================================================
     // Movement helpers
-    // =========================
+    // =========================================================
     private void StopMove()
     {
         if (agent == null || !agent.enabled) return;
@@ -390,9 +434,31 @@ public class BossController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10f);
     }
 
+    // ✅ 如果 LayerMask 没配（value==0），尝试自动推断 Player Layer
+    private void AutoFixPlayerLayerMaskIfNeeded()
+    {
+        if (playerLayer.value != 0) return;
+
+        if (target != null)
+        {
+            int layer = target.gameObject.layer;
+            if (layer >= 0 && layer <= 31)
+            {
+                playerLayer = 1 << layer;
+                return;
+            }
+        }
+
+        int playerLayerIndex = LayerMask.NameToLayer("Player");
+        if (playerLayerIndex >= 0)
+        {
+            playerLayer = 1 << playerLayerIndex;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
-        if (attackOrigin == null) return;
-        Gizmos.DrawWireSphere(attackOrigin.position + transform.forward * hitForwardOffset, hitRadius);
+        Transform o = attackOrigin != null ? attackOrigin : transform;
+        Gizmos.DrawWireSphere(o.position + transform.forward * hitForwardOffset, hitRadius);
     }
 }
