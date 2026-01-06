@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7746937073897310847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_axe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 586031034791329575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3418982902232141771}
   - component: {fileID: 4555482175761920652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3471846278573125118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392467315622148773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5305332470027742914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandRingEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5512940596679244042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3433308804674384652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5175492374304886753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5330795373202951222}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 534286245195958787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandThumbEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5089865024326344967}
   - component: {fileID: 6769765509312941077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32129
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3005855468661676450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8028545161761360897}
   - component: {fileID: 2877378083532920085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group13075
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5236237274663320187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7431535309542443682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHipEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -723,7 +723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1597473880312721471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5779316254373538459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,7 +788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4900608814660311060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5618458883140405267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftArm_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5887453584676485221}
   - component: {fileID: 4599287556781966135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group62640
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 971338220358150607}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5424087797032023774}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283172879085567667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,7 +1047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2463808499180401358}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,7 +1079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 134139772011636185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightFootEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,7 +1110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3824392428848942507}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3915147918344992014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_axe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,7 +1173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4040059988639048446}
   - component: {fileID: 1155234075713131629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32118
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1278,7 +1278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3958902582847516540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandPinkyEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1309,7 +1309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6985393583218601029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_shield_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1340,7 +1340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6537726755191432305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1372,7 +1372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2192360109262247461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7597709584319258803}
   - component: {fileID: 8521440224238212370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group60832
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6786889828822380258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1535,7 +1535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8994838478717335170}
   - component: {fileID: 9041660062795558639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group14483
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1654,7 +1654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5734023011735161405}
   - component: {fileID: 4826350177164851716}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group43130
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1155790413590929261}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,7 +1777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8761490979076537532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandIndexEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1808,7 +1808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6590362243990361455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1840,7 +1840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 649176186632415684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_right_toga3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1872,7 +1872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452314921018761767}
   - component: {fileID: 6552596848653974425}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group50856
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1967,7 +1967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1816526798069318901}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftKneeEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1998,7 +1998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4960836389340512270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2030,7 +2030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987882173768902386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Left_narrow_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2062,7 +2062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6666970450852155239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_front_toga2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2094,7 +2094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7158998931991477378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2126,7 +2126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1130016082871185586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2157,7 +2157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4575700428384999543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2190,7 +2190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8749559204780685898}
   - component: {fileID: 8569829548446288843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group39219
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2278,7 +2278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8445142285113067563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2311,7 +2311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5999784933001867693}
   - component: {fileID: 1766239541251911969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group1162
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2419,7 +2419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072645071558071539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_smallshield2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2450,7 +2450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8189463180149413898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2481,7 +2481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8698652030518083922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3597117840756898086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2549,7 +2549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2540504139558534981}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2581,7 +2581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2622612780558604394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8981024892818024241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2646,7 +2646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7524850658655441882}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftShoulderEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2677,7 +2677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2447511222231700754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2713,7 +2713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5911889177498410291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2746,7 +2746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2571999725993379071}
   - component: {fileID: 1628880660529868726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group48165
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2833,7 +2833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2896440528098717827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2870,7 +2870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7389270998942514950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2901,7 +2901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865620001213463737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandIndexEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2932,7 +2932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529277102047030117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandPinkyEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2963,7 +2963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9136550044359800101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LLeather_shields2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2994,7 +2994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6404619095117363382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3026,7 +3026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4271706752768723954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_right_toga2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3058,7 +3058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7767838689551813225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3089,7 +3089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9222653303365974977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_left_toga_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3120,7 +3120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7997069361296832160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_HipsEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3151,7 +3151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5237495028845663837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7631280252498329175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3215,7 +3215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5814881173823924785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_narrowtoga_front_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3247,7 +3247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4749980877428204783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_right_toga1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3279,7 +3279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715240265392874725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3313,7 +3313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6323703463373095038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandMiddleEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3344,7 +3344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3729357704560225880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3383,7 +3383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2691984000996149110}
   - component: {fileID: 1174487545980519099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group55090
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3480,7 +3480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4648953908672642185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3512,7 +3512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5183599032316890518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3544,7 +3544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8604170550568658175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint64
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3575,7 +3575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5620769047698574138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3607,7 +3607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2599350573851949806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3639,7 +3639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5681494987147667515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3671,7 +3671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7681392094371335583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3705,7 +3705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2959303446918852293}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightArm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3738,7 +3738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086171996734700499}
   - component: {fileID: 3226927861197052871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group16066
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3839,7 +3839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1202069796575208277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3870,7 +3870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2658545201240917386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_front_toga3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3901,7 +3901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2949556142877371081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3933,7 +3933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8036065768763306566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3966,7 +3966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915264876347029737}
   - component: {fileID: 7160558228974751249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group9417
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4053,7 +4053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763742821412262408}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4085,7 +4085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2258619786640503572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4117,7 +4117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474798229603347152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4149,7 +4149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4697129524932972681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4181,7 +4181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3582711399795035337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4212,7 +4212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6308003962267600591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4244,7 +4244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445552418864568031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4275,7 +4275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5715528478280815018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4308,7 +4308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8618388019110181081}
   - component: {fileID: 7924709998280316875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group60903
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4398,7 +4398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2461589540528588636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandThumbEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4429,7 +4429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4442206201939743122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_narrow3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4460,7 +4460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7255231217531551671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4542,7 +4542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4862252820046422176}
   - component: {fileID: 8418998332268427768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group59042
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4630,7 +4630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2861498317873950126}
   - component: {fileID: 3773839240630256158}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group11291
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4716,7 +4716,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9192132849367142678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4749,7 +4749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2618978140837182292}
   - component: {fileID: 1608987053444766179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group57106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4835,7 +4835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099589128976632522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4867,7 +4867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2320511389658637725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6393611689251910325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_shield_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4931,7 +4931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 978594339291916016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4963,7 +4963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2564415261485915667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4995,7 +4995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8381088921456483742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5026,7 +5026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5359322709648187332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5058,7 +5058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7664093820934693493}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5090,7 +5090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8364781183328618024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_backleft_bag2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5121,7 +5121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3331941530224417084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5153,7 +5153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6480616434751280931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHipEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5184,7 +5184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601255753605569545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_backright_bag2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5216,7 +5216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 154629168043061221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5265,7 +5265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8918705088047799745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5298,7 +5298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8980349995117866216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_toga1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5330,7 +5330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 661713575129029641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5361,7 +5361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5028683376694430059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_front_toga1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5393,7 +5393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4044717325583546871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5424,7 +5424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5074788847342221090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5456,7 +5456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2241670391946751230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5487,7 +5487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5179836861693802612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandRingEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5518,7 +5518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5784815828589435181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5549,7 +5549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1705087161390525476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5582,7 +5582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482473281763645571}
   - component: {fileID: 1241866667398920370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group35013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5679,7 +5679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4418659190656002603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mask_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5711,7 +5711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7909639868750495145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5745,7 +5745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7261520742687097568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5777,7 +5777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7067093136695277214}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_frontright_bag1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5809,7 +5809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7654721515299161585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Left_narrow_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5840,7 +5840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 912532721463413988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5873,7 +5873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4330175258502814413}
   - component: {fileID: 6022203762661613188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32122
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5965,7 +5965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7004274739837171984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_narrow__toga_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5997,7 +5997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2388528245903269104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6029,7 +6029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 403009492549038656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6061,7 +6061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4848214741147492065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6094,7 +6094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5918707207953072357}
   - component: {fileID: 3533838437869222754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group14670
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6187,7 +6187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8289555059998053462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6219,7 +6219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2613460042396975204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6251,7 +6251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8675972226153359847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6283,7 +6283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1585501270433445965}
   - component: {fileID: 2653584290680202755}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group64203
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6373,7 +6373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7880287678716441400}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6405,7 +6405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6587884738484237326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6438,7 +6438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7682905392164165910}
   - component: {fileID: 2078751280196346127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32123
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6526,7 +6526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3925024195672095294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6558,7 +6558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 205361876286383873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftFootEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6589,7 +6589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5811075892158583810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6621,7 +6621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7000681349229936150}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightShoulderEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6653,7 +6653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1428347963461111975}
   - component: {fileID: 4283702032250761500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group5418
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6744,7 +6744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4816851840007806440}
   - component: {fileID: 7618596593813918647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group14682
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6836,7 +6836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5628453581032352818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6868,7 +6868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653558427214496888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6899,7 +6899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5952218819013837768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightElbowEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6930,7 +6930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9123933416985247671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6962,7 +6962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3880265672536945722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6994,7 +6994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738117041333397020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7025,7 +7025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6384258169944979401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandMiddleEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7056,7 +7056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4697993853144496127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7089,7 +7089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4564795665845832492}
   - component: {fileID: 4101490057781652293}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group27214
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7178,7 +7178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2515675733731288324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftWristEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7209,7 +7209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2985872393180828889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7241,7 +7241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2783507871619886975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7273,7 +7273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3984863605139737532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7305,7 +7305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1983522239264821469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_HeadEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7336,7 +7336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6763630366835183693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Reference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7398,7 +7398,7 @@ GameObject:
   - component: {fileID: 971220354032644177}
   - component: {fileID: 2584823660981717701}
   - component: {fileID: 7587878916970026732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7488,7 +7488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5473839009479964432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_narrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7520,7 +7520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5815951604975919406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_narrowtoga_front_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7551,7 +7551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3707611351039801153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mid_narrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7583,7 +7583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7982625792245983494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightArm3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7614,7 +7614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1424656125472375613}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7646,7 +7646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2964558776593235612}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LLeather_shields1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7679,7 +7679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5901984507421702568}
   - component: {fileID: 643173344154733831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group53004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7768,7 +7768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3731470927079193882}
   - component: {fileID: 4206513265500017979}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group52974
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7858,7 +7858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7234066100714416603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_backright_bag2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7889,7 +7889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142097455666552717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7921,7 +7921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5239254623267959570}
   - component: {fileID: 7954619211657540890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group21281
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8011,7 +8011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1699745150126067227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8043,7 +8043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8184758887131046887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8076,7 +8076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1999944261804677964}
   - component: {fileID: 8942451096977632149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group19169
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8167,7 +8167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952785663341662522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8198,7 +8198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1661084197430467973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8230,7 +8230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888214217494949311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8262,7 +8262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2825704571061503148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8295,7 +8295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451198464720173004}
   - component: {fileID: 7073759073036441460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group41218
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8391,7 +8391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593068220507724799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Reference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8423,7 +8423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8606441827337179175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8454,7 +8454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4320320356925086461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_smallshield1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8486,7 +8486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349485364165499511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_narrow__toga_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8519,7 +8519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5633877419407427005}
   - component: {fileID: 3755718367088266270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32119
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8611,7 +8611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6389047372883573860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8643,7 +8643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5263681296158274766}
   - component: {fileID: 5265707303971794448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group25322
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8737,7 +8737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2052414180181560985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Left_narrow_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8769,7 +8769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6945249366097556160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8801,7 +8801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5217569074309587915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_narrowtoga_front_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8833,7 +8833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6541197156132664488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8865,7 +8865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013941326645203617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_left_toga2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8896,7 +8896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6905728654978998378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_ChestOriginEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8927,7 +8927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5137212106186313914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftArm_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8960,7 +8960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920386485785237392}
   - component: {fileID: 1847828223961220290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group46670
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9053,7 +9053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5481456652493178434}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9085,7 +9085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2919547493683770246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9117,7 +9117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1185976062374323141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mid_narrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9149,7 +9149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1645752567613637516}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9185,7 +9185,7 @@ GameObject:
   - component: {fileID: 8795875123774252534}
   - component: {fileID: 3384540720013222120}
   - component: {fileID: 1285851466487231746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -9248,10 +9248,13 @@ MonoBehaviour:
   speed: 3.5
   sensitivity: 2
   canMove: 1
+  rb: {fileID: 0}
   animator: {fileID: 6358211018724775352}
   ps: {fileID: 0}
+  maxHP: 20
   HP: 20
   isDead: 0
+  hitStunSeconds: 0.25
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -9261,6 +9264,7 @@ MonoBehaviour:
   normalDamage: 2
   heavyAttackRange: 3.5
   heavyDamage: 4
+  attackBonus: 0
   attackTrigger: Attack
   heavyAttackTrigger: HeavyAttack
   chargingBool: Charging
@@ -9273,6 +9277,13 @@ MonoBehaviour:
   moveYParam: MoveY
   moveStateParam: MoveState
   chargeTime: 0.4
+  backstepKey: 306
+  backstepDistance: 2.5
+  backstepDuration: 0.15
+  backstepCooldown: 0.45
+  invincibleDuration: 0.3
+  backstepTrigger: Backstep
+  locomotionStateName: Locomotion
 --- !u!54 &3384540720013222120
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9332,7 +9343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7502882051158111634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9364,7 +9375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4740103343156079954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9396,7 +9407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601462142325549087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_ChestEndEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9428,7 +9439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7135699518967125642}
   - component: {fileID: 1155614879459812940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group29013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9513,7 +9524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4361779025706692473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9545,7 +9556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6923351588648285426}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9577,7 +9588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4539146669534094930}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9609,7 +9620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299824555544568122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9642,7 +9653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6345716113765768811}
   - component: {fileID: 1855158038754155494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group28967
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9756,7 +9767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4136411558172740832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9789,7 +9800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8945139985808621541}
   - component: {fileID: 7524439325494063195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group7457
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9875,7 +9886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124657545288901395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9907,7 +9918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107611199134164471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightKneeEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9938,7 +9949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6332222510658727068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9970,7 +9981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4509345939021614029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_back_left_toga_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10003,7 +10014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817369820492619843}
   - component: {fileID: 8640410285429508293}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group13033
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10096,7 +10107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8988611462259469121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftAnkleEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10128,7 +10139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8933379663869131600}
   - component: {fileID: 1973577877020487697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group46653
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10241,7 +10252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956705310039291451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10274,7 +10285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8034628039705299416}
   - component: {fileID: 7758029081672940144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group30666
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10362,7 +10373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8892198117536446600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10398,7 +10409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6101851560211242747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_toga2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10431,7 +10442,7 @@ GameObject:
   - component: {fileID: 7170807573229075571}
   - component: {fileID: 6065232605936153558}
   - component: {fileID: 8343199382679586588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: weapon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10512,7 +10523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 779918251491119842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_left_toga1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10544,7 +10555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054015087324365715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10575,7 +10586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2009416179120557428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10606,7 +10617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550245084619038353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10638,7 +10649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3118869998354814024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_upbelt9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10671,7 +10682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8045101415144123190}
   - component: {fileID: 7683198242740252355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group44900
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10764,7 +10775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5951586957446531449}
   - component: {fileID: 8716266421928875380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group16072
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10852,7 +10863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3225780962163687563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftElbowEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10884,7 +10895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8861912952938293578}
   - component: {fileID: 6013082819737393527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group44973
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10972,7 +10983,7 @@ GameObject:
   - component: {fileID: 7940434752778986455}
   - component: {fileID: 7940434752780083479}
   - component: {fileID: 7940434752772525079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Heater_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11074,7 +11085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2340162992568600130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11105,7 +11116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6517615679234326586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mask_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11137,7 +11148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3717618861058183518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11168,7 +11179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7991837316945247941}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mask_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11199,7 +11210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6429746292312757756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightToeBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11230,7 +11241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5501031651664755768}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11262,7 +11273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7244554058836569281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightWristEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11293,7 +11304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227920876247260265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_frontright_bag2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11324,7 +11335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4816730671011454428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightAnkleEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11356,7 +11367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5319306711670473191}
   - component: {fileID: 5122054787502993562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group3319
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11443,7 +11454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4733979441460529600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11476,7 +11487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7981378111373300287}
   - component: {fileID: 4424057870832853886}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_RetopoGroup1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11572,7 +11583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3743051305384595464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11603,7 +11614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4514131476602940725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11635,7 +11646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7926209044444049671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11668,7 +11679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2729620792101887654}
   - component: {fileID: 6406108124514807616}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group23343
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11755,7 +11766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5882363668761080821}
   - component: {fileID: 1323614306745087422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32121
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11843,7 +11854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913074060729884090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11877,7 +11888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632876639477161553}
   - component: {fileID: 2350428502770687624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group32120
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11969,7 +11980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6909109368981373221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_RightHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12001,7 +12012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8856205077258074830}
   - component: {fileID: 3397939078699654701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crusader_peredelka_UV_Group30694
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12089,7 +12100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8322665681100397340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LLeather_shields1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12121,7 +12132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3850510075208210836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12153,7 +12164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555508312417141943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12185,7 +12196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7404455250146134265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_narrowtoga_front_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12217,7 +12228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668414869197948254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_mid_narrow3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12248,7 +12259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3722603685612696818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_shield_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12280,7 +12291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4554510529795019033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_backleft_bag1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12312,7 +12323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5718402847148523644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12345,7 +12356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3551103371684513229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_RightHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12376,7 +12387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7130370328736859925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_LLeather_shields1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12407,7 +12418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3436010228057956635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12439,7 +12450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7685728668415018858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_right_narrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12471,7 +12482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5372359072638660103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_Ctrl_LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12503,7 +12514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7950381905757229776}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crusader_downbelt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

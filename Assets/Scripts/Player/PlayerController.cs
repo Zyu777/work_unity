@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,13 +9,20 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
 
     [Header("Refs")]
+    public Rigidbody rb;
     public Animator animator;
     public ParticleSystem ps;
 
     [Header("HP")]
-    public int maxHP = 20;         // ✅ 最大血量
+    public int maxHP = 20;
     public int HP = 20;
     public bool isDead;
+
+    [Header("Hit Stun")]
+    public float hitStunSeconds = 0.25f;
+    private float hitStunEndTime = -999f;
+    private bool hitStunActive = false;
+    private RigidbodyConstraints cachedConstraints;
 
     [Header("Combat")]
     public LayerMask enemyLayer;
@@ -27,14 +35,16 @@ public class PlayerController : MonoBehaviour
     public float heavyAttackRange = 3.5f;
     public int heavyDamage = 4;
 
+    [Header("Attack Buff")]
+    public int attackBonus = 0;
+
     [Header("Animator Params")]
     public string attackTrigger = "Attack";
-
-    public string heavyAttackTrigger = "HeavyAttack";     // RightDown: Locomotion -> Attack_Start
-    public string chargingBool = "Charging";              // Hold: true
-    public string chargedBool = "Charged";                // Animator 蓄满标记
-    public string releaseHeavyTrigger = "ReleaseHeavy";   // RightUp(蓄满): Attack_Hold -> HeavyAttack(释放)
-    public string cancelHeavyTrigger = "CancelHeavy";     // RightUp(未蓄满)/打断：回Locomotion
+    public string heavyAttackTrigger = "HeavyAttack";
+    public string chargingBool = "Charging";
+    public string chargedBool = "Charged";
+    public string releaseHeavyTrigger = "ReleaseHeavy";
+    public string cancelHeavyTrigger = "CancelHeavy";
 
     public string hitTrigger = "Hit";
     public string deadBool = "Dead";
@@ -45,20 +55,47 @@ public class PlayerController : MonoBehaviour
     [Header("Right Click Charge")]
     public float chargeTime = 0.4f;
 
-    // 运行时状态
+    // =========================
+    // Backstep / I-Frames
+    // =========================
+    [Header("Backstep (Ctrl)")]
+    public KeyCode backstepKey = KeyCode.LeftControl;
+    public float backstepDistance = 2.5f;      // 固定后撤距离
+    public float backstepDuration = 0.15f;     // 后撤位移时间
+    public float backstepCooldown = 0.45f;     // 后撤CD
+    public float invincibleDuration = 0.30f;   // i-frame 时长
+    public string backstepTrigger = "Backstep";// Animator Trigger
+    public string locomotionStateName = "Locomotion"; // 你Animator里空闲状态名字就是 Locomotion
+
+    private bool isBackstepping = false;
+    private bool invincible = false;
+    private float nextBackstepTime = -999f;
+
+    // runtime
     private float chargeTimer = 0f;
     private bool holdingRight = false;
-    private bool chargedLogic = false; // 仅用于判断“是否蓄满”
+    private bool chargedLogic = false;
     private bool normalHitArmed = false;
+
+    // input cache
+    private float inputH;
+    private float inputV;
+    private float mouseX;
 
     void Awake()
     {
+        if (rb == null) rb = GetComponent<Rigidbody>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (ps == null) ps = GetComponentInChildren<ParticleSystem>(true);
         if (attackOrigin == null) attackOrigin = transform;
 
-        // ✅ 保底修正
         HP = Mathf.Clamp(HP, 0, maxHP);
+
+        if (rb != null)
+        {
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        }
     }
 
     void Start()
@@ -75,16 +112,29 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-        bool lockByAnim = IsAnimatorInHeavyStates() || (animator != null && animator.GetBool(chargingBool));
-        bool allowMoveNow = canMove && !lockByAnim;
+        UpdateHitStunLifecycle();
 
-        if (allowMoveNow)
+        // ✅ 魂游规则后撤：只允许在“空闲Locomotion”时
+        TryBackstep();
+
+        bool lockByAnim = IsAnimatorInHeavyStates() || (animator != null && animator.GetBool(chargingBool));
+        bool lockByHit = Time.time < hitStunEndTime;
+        bool lockByBackstep = isBackstepping;
+
+        bool allowControlNow = canMove && !lockByAnim && !lockByHit && !hitStunActive && !lockByBackstep;
+
+        if (allowControlNow)
         {
-            Moveplayer();
-            RotatePlayer();
+            inputH = Input.GetAxis("Horizontal");
+            inputV = Input.GetAxis("Vertical");
+            mouseX = Input.GetAxis("Mouse X") * sensitivity;
         }
         else
         {
+            inputH = 0f;
+            inputV = 0f;
+            mouseX = 0f;
+
             if (animator != null)
             {
                 animator.SetFloat(moveXParam, 0f);
@@ -92,15 +142,32 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Attack();
-        HeavyAttack();
+        // 后撤期间不允许攻击/蓄力
+        if (!isBackstepping)
+        {
+            Attack();
+            HeavyAttack();
+        }
     }
 
-    private void Moveplayer()
+    void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if (isDead) return;
+        if (rb == null) return;
 
+        bool lockByAnim = IsAnimatorInHeavyStates() || (animator != null && animator.GetBool(chargingBool));
+        bool lockByHit = Time.time < hitStunEndTime;
+        bool lockByBackstep = isBackstepping;
+
+        bool allowControlNow = canMove && !lockByAnim && !lockByHit && !hitStunActive && !lockByBackstep;
+        if (!allowControlNow) return;
+
+        MovePlayer_RB(inputH, inputV);
+        RotatePlayer_RB(mouseX);
+    }
+
+    private void MovePlayer_RB(float horizontal, float vertical)
+    {
         if (animator != null)
         {
             animator.SetFloat(moveXParam, horizontal);
@@ -118,24 +185,140 @@ public class PlayerController : MonoBehaviour
             speed = 3.5f;
         }
 
-        Vector3 movement = new Vector3(horizontal, 0, vertical) * Time.deltaTime * speed;
-        transform.Translate(movement, Space.Self);
+        Vector3 localMove = new Vector3(horizontal, 0, vertical);
+        Vector3 worldMove = transform.TransformDirection(localMove).normalized * speed * Time.fixedDeltaTime;
+
+        rb.MovePosition(rb.position + worldMove);
     }
 
-    private void RotatePlayer()
+    private void RotatePlayer_RB(float mouseXDelta)
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        transform.Rotate(Vector3.up * mouseX);
+        if (Mathf.Abs(mouseXDelta) < 0.0001f) return;
+
+        Quaternion rot = Quaternion.Euler(0f, mouseXDelta, 0f);
+        rb.MoveRotation(rb.rotation * rot);
     }
 
     // =========================
-    // 普攻：只触发动画，命中由动画事件结算
+    // Backstep: 只能在 Locomotion（未攻击未受击未蓄力）时用
+    // =========================
+    private void TryBackstep()
+    {
+        bool pressed = Input.GetKeyDown(backstepKey) || Input.GetKeyDown(KeyCode.RightControl);
+        if (!pressed) return;
+
+        if (Time.time < nextBackstepTime) return;
+        if (isBackstepping) return;
+        if (isDead) return;
+
+        // 受击/硬直中不允许
+        if (hitStunActive) return;
+        if (Time.time < hitStunEndTime) return;
+
+        // 蓄力/重击中不允许
+        if (holdingRight || IsAnimatorInHeavyStates()) return;
+        if (animator != null && animator.GetBool(chargingBool)) return;
+
+        // ✅ 必须在 Locomotion（空闲）才能后撤
+        if (!IsInState(locomotionStateName)) return;
+
+        StartCoroutine(CoBackstep());
+    }
+
+    private IEnumerator CoBackstep()
+    {
+        isBackstepping = true;
+        nextBackstepTime = Time.time + backstepCooldown;
+
+        // 开无敌
+        invincible = true;
+        float invEnd = Time.time + invincibleDuration;
+
+        // 清速度，避免惯性
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        // 播放后撤动画 Trigger
+        if (animator != null && !string.IsNullOrEmpty(backstepTrigger))
+        {
+            animator.ResetTrigger(backstepTrigger);
+            animator.SetTrigger(backstepTrigger);
+        }
+
+        // 后撤固定距离、短时间完成（更像“后退加快”）
+        Vector3 start = rb.position;
+        Vector3 dirBack = -transform.forward;
+        dirBack.y = 0f;
+        if (dirBack.sqrMagnitude < 0.0001f) dirBack = -transform.forward;
+        dirBack.Normalize();
+
+        Vector3 targetPos = start + dirBack * backstepDistance;
+
+        // 后撤期间禁用常规输入移动/旋转
+        bool oldCanMove = canMove;
+        canMove = false;
+
+        float t = 0f;
+        while (t < backstepDuration)
+        {
+            if (isDead) break;
+
+            t += Time.fixedDeltaTime;
+            float alpha = Mathf.Clamp01(t / Mathf.Max(0.0001f, backstepDuration));
+
+            // EaseOut：一开始快（魂游感觉）
+            float eased = 1f - Mathf.Pow(1f - alpha, 3f);
+
+            rb.MovePosition(Vector3.Lerp(start, targetPos, eased));
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        canMove = oldCanMove;
+        isBackstepping = false;
+
+        // 无敌可能还没结束
+        while (Time.time < invEnd)
+            yield return null;
+
+        invincible = false;
+    }
+
+    private bool IsInState(string stateName)
+    {
+        if (animator == null) return true;
+        var cur = animator.GetCurrentAnimatorStateInfo(0);
+        // 只看当前层0
+        return cur.IsName(stateName);
+    }
+
+    // =========================
+    // 强制受击表现（Boss 二阶段用）
+    // =========================
+    public void ForceHitReaction(float lockSeconds = 0.25f)
+    {
+        if (isDead) return;
+
+        // 后撤中不打断（魂游一般允许翻滚期间无敌）
+        if (isBackstepping) return;
+
+        normalHitArmed = false;
+        if (holdingRight || IsAnimatorInHeavyStates())
+            CancelCharge();
+
+        EnterHitStun(lockSeconds);
+
+        if (animator != null) animator.SetTrigger(hitTrigger);
+        if (ps != null) ps.Play();
+    }
+
+    // =========================
+    // Attacks
     // =========================
     public void Attack()
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
-        // 正在蓄力/重击则取消
         if (holdingRight || IsAnimatorInHeavyStates())
             CancelCharge();
 
@@ -148,12 +331,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // =========================
-    // 右键蓄力：起手/蓄力不造成伤害，释放动作命中帧造成伤害
-    // =========================
     public void HeavyAttack()
     {
-        // Down：起手
         if (Input.GetMouseButtonDown(1))
         {
             holdingRight = true;
@@ -173,7 +352,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Hold：达到阈值进入蓄力
         if (holdingRight && Input.GetMouseButton(1))
         {
             chargeTimer += Time.deltaTime;
@@ -190,7 +368,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Up：未蓄满取消；蓄满释放
         if (holdingRight && Input.GetMouseButtonUp(1))
         {
             holdingRight = false;
@@ -201,7 +378,6 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            // ✅ 释放：进入 HeavyAttack（释放动作）
             if (animator != null)
             {
                 animator.SetBool(chargingBool, false);
@@ -217,29 +393,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // =========================
-    // Animation Event：普攻命中帧（加在 Attack1/Attack2 的命中帧）
-    // =========================
     public void AnimEvent_NormalHit()
     {
         if (isDead) return;
         if (!normalHitArmed) return;
 
-        DealDamageInFront(normalAttackRange, normalDamage);
+        DealDamageInFront(normalAttackRange, normalDamage + attackBonus);
         normalHitArmed = false;
     }
 
-    // =========================
-    // Animation Event：重击命中帧（加在 HeavyAttack 释放动作的命中帧）
-    // =========================
     public void AnimEvent_HeavyHit()
     {
         if (isDead) return;
 
-        // ✅ 无条件结算（你现在确认这条链路是通的）
-        DealDamageInFront(heavyAttackRange, heavyDamage);
+        DealDamageInFront(heavyAttackRange, heavyDamage + attackBonus);
 
-        // 清 Animator 蓄力标记，避免卡条件
         if (animator != null)
         {
             animator.SetBool(chargedBool, false);
@@ -247,9 +415,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // =========================
-    // Damage
-    // =========================
     private void DealDamageInFront(float range, int damage)
     {
         Vector3 center = attackOrigin.position + transform.forward * (range * 0.6f);
@@ -257,21 +422,33 @@ public class PlayerController : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(center, attackRadius, enemyLayer, QueryTriggerInteraction.Ignore);
         if (hits == null || hits.Length == 0) return;
 
-        // 你原来的方式：SendMessage
         hits[0].transform.root.gameObject.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
     }
 
+    public void AddAttack(int amount)
+    {
+        if (isDead) return;
+        if (amount <= 0) return;
+
+        attackBonus += amount;
+    }
+
     // =========================
-    // HP: 受击 / 回血
+    // TakeDamage with i-frames
     // =========================
     public void TakeDamage(int attackValue)
     {
         if (isDead) return;
 
-        // 受击时打断蓄力
+        // ✅ 后撤无敌期间：完全不受伤
+        if (invincible) return;
+
+        // 受击打断
         normalHitArmed = false;
         if (holdingRight || IsAnimatorInHeavyStates())
             CancelCharge();
+
+        EnterHitStun(hitStunSeconds);
 
         HP -= attackValue;
         HP = Mathf.Clamp(HP, 0, maxHP);
@@ -287,7 +464,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ✅ 血包调用：回血 5，满血不消耗（返回 false）
     public bool Heal(int amount)
     {
         if (isDead) return false;
@@ -297,9 +473,53 @@ public class PlayerController : MonoBehaviour
         HP += amount;
         HP = Mathf.Clamp(HP, 0, maxHP);
 
-        // 可选：回血播放粒子
         if (ps != null) ps.Play();
         return true;
+    }
+
+    // =========================
+    // Hit Stun Core
+    // =========================
+    private void EnterHitStun(float seconds)
+    {
+        if (seconds <= 0f) return;
+
+        // 后撤期间不吃硬直（魂游 i-frame）
+        if (isBackstepping) return;
+
+        hitStunEndTime = Mathf.Max(hitStunEndTime, Time.time + seconds);
+
+        if (rb == null) return;
+
+        if (!hitStunActive)
+        {
+            hitStunActive = true;
+            cachedConstraints = rb.constraints;
+        }
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    private void UpdateHitStunLifecycle()
+    {
+        if (!hitStunActive) return;
+
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        if (Time.time >= hitStunEndTime)
+        {
+            if (rb != null)
+                rb.constraints = cachedConstraints;
+
+            hitStunActive = false;
+        }
     }
 
     // =========================
