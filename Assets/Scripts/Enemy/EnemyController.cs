@@ -13,11 +13,11 @@ public class EnemyController : MonoBehaviour
     public bool isDead = false;
 
     [Header("Ranges")]
-    public float chaseRange = 8f;
+    public float chaseRange = 15f;
     public float attackRange = 2f;
 
     [Header("Attack")]
-    public float attackCD = 1.0f;
+    public float attackCD = 3f;
     private float lastAttackTime = -999f;
     public int damageToPlayer = 2;
 
@@ -27,6 +27,13 @@ public class EnemyController : MonoBehaviour
     public string deadBool = "Dead";
     public string moveYParam = "MoveY";
     public string moveStateParam = "MoveState";
+
+    [Header("Drop (Health Pack)")]
+    public GameObject healthPackPrefab;
+    [Range(0f, 1f)] public float dropChance = 0.5f; // ✅ 50%
+    public Vector3 dropOffset = new Vector3(0, 0.2f, 0);
+
+    private bool dropped = false;
 
     void Awake()
     {
@@ -38,7 +45,6 @@ public class EnemyController : MonoBehaviour
     {
         if (agent != null)
         {
-            // 关键：停止距离=攻击距离，避免很远就停/踏步
             agent.stoppingDistance = attackRange;
             agent.isStopped = false;
         }
@@ -60,9 +66,15 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        if (agent != null && agent.enabled && !agent.isOnNavMesh)
+        {
+            StopMove();
+            UpdateMoveAnim();
+            return;
+        }
+
         float dis = Vector3.Distance(target.transform.position, transform.position);
 
-        // 1) 攻击范围内：停下并攻击
         if (dis <= attackRange)
         {
             StopMove();
@@ -79,14 +91,12 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // 2) 追击范围内：追踪
         if (dis <= chaseRange)
         {
-            if (agent != null)
+            if (agent != null && agent.enabled)
             {
                 agent.isStopped = false;
 
-                // 投影到 NavMesh，避免目标点不可达造成抖动/踏步
                 if (NavMesh.SamplePosition(target.transform.position, out var hit, 2f, NavMesh.AllAreas))
                     agent.SetDestination(hit.position);
                 else
@@ -97,41 +107,53 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // 3) 超出追击范围：停下
         StopMove();
         UpdateMoveAnim();
     }
 
-    // 玩家攻击会调用这个
     public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         HP -= damage;
 
-        if (animator != null)
-            animator.SetTrigger(hitTrigger);
+        if (animator != null) animator.SetTrigger(hitTrigger);
 
         if (HP <= 0)
         {
-            isDead = true;
-
-            if (animator != null)
-                animator.SetBool(deadBool, true);
-
-            StopMove();
-
-            // 可选：禁用碰撞/Agent，避免尸体挡路
-            if (agent != null) agent.enabled = false;
-
-            // 可选：禁用这个脚本，不再Update
-            enabled = false;
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        if (isDead) return;
+
+        isDead = true;
+
+        if (animator != null) animator.SetBool(deadBool, true);
+
+        StopMove();
+
+        TryDropHealthPack();
+
+        if (agent != null) agent.enabled = false;
+    }
+
+    private void TryDropHealthPack()
+    {
+        if (dropped) return;
+        dropped = true;
+
+        if (healthPackPrefab == null) return;
+        if (Random.value > dropChance) return;
+
+        Instantiate(healthPackPrefab, transform.position + dropOffset, Quaternion.identity);
     }
 
     private void StopMove()
     {
-        if (agent == null) return;
+        if (agent == null || !agent.enabled) return;
 
         agent.isStopped = true;
         agent.ResetPath();
