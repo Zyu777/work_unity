@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement; // ✅ 加载场景需要
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +18,19 @@ public class PlayerController : MonoBehaviour
     public int maxHP = 20;
     public int HP = 20;
     public bool isDead;
+
+    // =========================
+    // ✅ Stamina
+    // =========================
+    [Header("Stamina")]
+    public int maxStamina = 40;
+    public float stamina = 40f;
+    public float staminaRegenPerSec = 2f;
+
+    [Header("Stamina Costs")]
+    public float costBackstep = 3f;   // Ctrl 后撤
+    public float costLight = 3f;      // 左键轻击
+    public float costHeavy = 5f;      // 右键蓄力释放成功
 
     [Header("Hit Stun")]
     public float hitStunSeconds = 0.25f;
@@ -61,12 +74,12 @@ public class PlayerController : MonoBehaviour
     // =========================
     [Header("Backstep (Ctrl)")]
     public KeyCode backstepKey = KeyCode.LeftControl;
-    public float backstepDistance = 2.5f;      // 固定后撤距离
-    public float backstepDuration = 0.15f;     // 后撤位移时间
-    public float backstepCooldown = 0.45f;     // 后撤CD
-    public float invincibleDuration = 0.30f;   // i-frame 时长
-    public string backstepTrigger = "Backstep";// Animator Trigger
-    public string locomotionStateName = "Locomotion"; // 你Animator里空闲状态名字就是 Locomotion
+    public float backstepDistance = 2.5f;
+    public float backstepDuration = 0.15f;
+    public float backstepCooldown = 0.45f;
+    public float invincibleDuration = 0.30f;
+    public string backstepTrigger = "Backstep";
+    public string locomotionStateName = "Locomotion";
 
     private bool isBackstepping = false;
     private bool invincible = false;
@@ -84,7 +97,7 @@ public class PlayerController : MonoBehaviour
     private float mouseX;
 
     // =========================
-    // ✅ Death -> UI Scene
+    // Death -> UI Scene
     // =========================
     [Header("Death -> UI Scene")]
     public float deathToUISceneDelay = 3f;
@@ -99,6 +112,8 @@ public class PlayerController : MonoBehaviour
         if (attackOrigin == null) attackOrigin = transform;
 
         HP = Mathf.Clamp(HP, 0, maxHP);
+
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
 
         if (rb != null)
         {
@@ -122,9 +137,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
+        // ✅ 体力每秒恢复 2 点（移动不消耗，所以无条件回）
+        RegenStamina();
+
         UpdateHitStunLifecycle();
 
-        // ✅ 魂游规则后撤：只允许在“空闲Locomotion”时
+        // ✅ Ctrl 后撤（会扣体力）
         TryBackstep();
 
         bool lockByAnim = IsAnimatorInHeavyStates() || (animator != null && animator.GetBool(chargingBool));
@@ -176,6 +194,21 @@ public class PlayerController : MonoBehaviour
         RotatePlayer_RB(mouseX);
     }
 
+    private void RegenStamina()
+    {
+        if (maxStamina <= 0) return;
+        stamina += staminaRegenPerSec * Time.deltaTime;
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+    }
+
+    private bool HasStamina(float cost) => stamina >= cost;
+
+    private void SpendStamina(float cost)
+    {
+        stamina -= cost;
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+    }
+
     private void MovePlayer_RB(float horizontal, float vertical)
     {
         if (animator != null)
@@ -210,7 +243,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // =========================
-    // Backstep: 只能在 Locomotion（未攻击未受击未蓄力）时用
+    // Backstep
     // =========================
     private void TryBackstep()
     {
@@ -232,6 +265,12 @@ public class PlayerController : MonoBehaviour
         // ✅ 必须在 Locomotion（空闲）才能后撤
         if (!IsInState(locomotionStateName)) return;
 
+        // ✅ 体力不足不允许后撤
+        if (!HasStamina(costBackstep)) return;
+
+        // ✅ 触发时扣体力
+        SpendStamina(costBackstep);
+
         StartCoroutine(CoBackstep());
     }
 
@@ -240,22 +279,18 @@ public class PlayerController : MonoBehaviour
         isBackstepping = true;
         nextBackstepTime = Time.time + backstepCooldown;
 
-        // 开无敌
         invincible = true;
         float invEnd = Time.time + invincibleDuration;
 
-        // 清速度，避免惯性
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        // 播放后撤动画 Trigger
         if (animator != null && !string.IsNullOrEmpty(backstepTrigger))
         {
             animator.ResetTrigger(backstepTrigger);
             animator.SetTrigger(backstepTrigger);
         }
 
-        // 后撤固定距离、短时间完成（更像“后退加快”）
         Vector3 start = rb.position;
         Vector3 dirBack = -transform.forward;
         dirBack.y = 0f;
@@ -264,7 +299,6 @@ public class PlayerController : MonoBehaviour
 
         Vector3 targetPos = start + dirBack * backstepDistance;
 
-        // 后撤期间禁用常规输入移动/旋转
         bool oldCanMove = canMove;
         canMove = false;
 
@@ -275,19 +309,15 @@ public class PlayerController : MonoBehaviour
 
             t += Time.fixedDeltaTime;
             float alpha = Mathf.Clamp01(t / Mathf.Max(0.0001f, backstepDuration));
-
-            // EaseOut：一开始快（魂游感觉）
             float eased = 1f - Mathf.Pow(1f - alpha, 3f);
 
             rb.MovePosition(Vector3.Lerp(start, targetPos, eased));
-
             yield return new WaitForFixedUpdate();
         }
 
         canMove = oldCanMove;
         isBackstepping = false;
 
-        // 无敌可能还没结束
         while (Time.time < invEnd)
             yield return null;
 
@@ -302,13 +332,11 @@ public class PlayerController : MonoBehaviour
     }
 
     // =========================
-    // 强制受击表现（Boss 二阶段用）
+    // 强制受击表现
     // =========================
     public void ForceHitReaction(float lockSeconds = 0.25f)
     {
         if (isDead) return;
-
-        // 后撤中不打断（魂游一般允许翻滚期间无敌）
         if (isBackstepping) return;
 
         normalHitArmed = false;
@@ -328,8 +356,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
+        // ✅ 体力不足不允许轻击
+        if (!HasStamina(costLight)) return;
+
         if (holdingRight || IsAnimatorInHeavyStates())
             CancelCharge();
+
+        // ✅ 触发时扣体力
+        SpendStamina(costLight);
 
         normalHitArmed = true;
 
@@ -342,6 +376,7 @@ public class PlayerController : MonoBehaviour
 
     public void HeavyAttack()
     {
+        // 按下右键：开始蓄力（不扣体力）
         if (Input.GetMouseButtonDown(1))
         {
             holdingRight = true;
@@ -361,6 +396,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // 按住右键：计时
         if (holdingRight && Input.GetMouseButton(1))
         {
             chargeTimer += Time.deltaTime;
@@ -377,15 +413,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // 松开右键：如果蓄满并释放成功 -> 扣 5 点体力
         if (holdingRight && Input.GetMouseButtonUp(1))
         {
             holdingRight = false;
 
+            // 未蓄满：取消（不扣体力）
             if (!chargedLogic)
             {
                 CancelCharge();
                 return;
             }
+
+            // ✅ 蓄满但体力不足：不允许释放，走取消
+            if (!HasStamina(costHeavy))
+            {
+                CancelCharge();
+                return;
+            }
+
+            // ✅ 释放成功时扣体力
+            SpendStamina(costHeavy);
 
             if (animator != null)
             {
@@ -449,10 +497,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-        // ✅ 后撤无敌期间：完全不受伤
         if (invincible) return;
 
-        // 受击打断
         normalHitArmed = false;
         if (holdingRight || IsAnimatorInHeavyStates())
             CancelCharge();
@@ -471,17 +517,14 @@ public class PlayerController : MonoBehaviour
             if (animator != null) animator.SetBool(deadBool, true);
             ResetChargeState();
 
-            // ✅ 死亡后解锁鼠标（UI用）
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // ✅ 3秒后进入 DeathScene
             if (!deathSceneLoading)
                 StartCoroutine(CoLoadDeathSceneAfterDelay());
         }
     }
 
-    // ✅ 死亡后延迟加载 UI 场景
     private IEnumerator CoLoadDeathSceneAfterDelay()
     {
         deathSceneLoading = true;
@@ -510,8 +553,6 @@ public class PlayerController : MonoBehaviour
     private void EnterHitStun(float seconds)
     {
         if (seconds <= 0f) return;
-
-        // 后撤期间不吃硬直（魂游 i-frame）
         if (isBackstepping) return;
 
         hitStunEndTime = Mathf.Max(hitStunEndTime, Time.time + seconds);
