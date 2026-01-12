@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4380044376928247433, guid: 143fb316403f997409826d1e17ee54f0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4514782077138980834, guid: 143fb316403f997409826d1e17ee54f0, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -445,8 +449,8 @@ MonoBehaviour:
   agent: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
-  maxHP: 10
-  HP: 10
+  maxHP: 30
+  HP: 30
   isDead: 0
   chaseRange: 15
   attackRange: 2.2

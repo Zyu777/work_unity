@@ -155,7 +155,14 @@ public class PlayerController : MonoBehaviour
         {
             inputH = Input.GetAxis("Horizontal");
             inputV = Input.GetAxis("Vertical");
-            mouseX = Input.GetAxis("Mouse X") * sensitivity;
+            mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime * 60f;
+
+            if (Mathf.Abs(mouseX) < 0.02f)
+                mouseX = 0f;
+
+            if (Cursor.lockState != CursorLockMode.Locked)
+                mouseX = 0f;
+
         }
         else
         {
@@ -176,6 +183,11 @@ public class PlayerController : MonoBehaviour
             Attack();
             HeavyAttack();
         }
+    }
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+            mouseX = 0f;
     }
 
     void FixedUpdate()

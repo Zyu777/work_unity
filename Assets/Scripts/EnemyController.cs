@@ -18,8 +18,12 @@ public class EnemyController : MonoBehaviour
     public bool isDead = false;
 
     [Header("Ranges")]
-    public float chaseRange = 15f;
+    public float chaseRange = 15f;     // 用于“第一次感知”
     public float attackRange = 2f;
+
+    [Header("Aggro (Solution 2)")]
+    public bool hasAggro = false;      // 一旦锁定目标就一直追
+    public float loseAggroRange = 0f;  // 0=永不丢失；>0=超过此距离才丢失仇恨
 
     [Header("Attack")]
     public float attackCD = 3f;
@@ -34,7 +38,7 @@ public class EnemyController : MonoBehaviour
     public bool requireFacing = true;
     [Range(0f, 180f)] public float facingAngle = 70f;
 
-    // ✅ 攻击结算门闩：建议由动画事件开启/关闭
+    // 攻击结算门闩：由动画事件开启/关闭
     private bool attackArmed = false;
 
     [Header("Animator Params")]
@@ -50,6 +54,17 @@ public class EnemyController : MonoBehaviour
     public Vector3 dropOffset = new Vector3(0, 0.2f, 0);
     private bool dropped = false;
 
+    [Header("Chase Destination Update")]
+    public float repathInterval = 0.15f; // 追击目的地更新节流
+    private float nextRepathTime = 0f;
+    private Vector3 lastChaseGoal = new Vector3(99999, 99999, 99999);
+    public float goalChangeThreshold = 0.25f;
+
+    // ================= DEBUG (可选) =================
+    public bool showDebugGUI = false;
+    private string _dbg;
+    private float _dbgNext;
+
     void Awake()
     {
         if (agent == null) agent = GetComponent<NavMeshAgent>();
@@ -57,8 +72,6 @@ public class EnemyController : MonoBehaviour
         if (attackOrigin == null) attackOrigin = transform;
 
         TryFindTarget(force: true);
-
-        // ✅ 防呆：LayerMask 没配时，尽量自动推断 Player Layer
         AutoFixPlayerLayerMaskIfNeeded();
     }
 
@@ -68,38 +81,41 @@ public class EnemyController : MonoBehaviour
         {
             agent.stoppingDistance = attackRange;
             agent.isStopped = false;
-
-            // 交给我们自己 FaceTarget 来转向（否则 Agent 会和你手动旋转抢控制）
-            agent.updateRotation = false;
+            agent.updateRotation = false; // 我们自己转向
         }
 
+        // 出生点吸附
         EnsureOnNavMesh();
+
+        // 如果你项目里用 RootMotion，建议先关掉避免和Agent抢控制
+        if (animator != null) animator.applyRootMotion = false;
     }
 
     void Update()
     {
         if (isDead)
         {
-            StopMove();
+            StopMove(clearPath: true);
             UpdateMoveAnim();
             return;
         }
 
-        // 目标可能后生成/被销毁：定时补找
+        // 定时补找玩家
         TryFindTarget(force: false);
 
         if (target == null || target.isDead)
         {
-            StopMove();
+            hasAggro = false;
+            StopMove(clearPath: false);
             UpdateMoveAnim();
             return;
         }
 
-        // NavMesh 安全
+        // 不在NavMesh上就吸附
+        EnsureOnNavMesh();
         if (agent != null && agent.enabled && !agent.isOnNavMesh)
         {
-            EnsureOnNavMesh();
-            StopMove();
+            StopMove(clearPath: false);
             UpdateMoveAnim();
             return;
         }
@@ -107,22 +123,38 @@ public class EnemyController : MonoBehaviour
         float dis = Vector3.Distance(target.transform.position, transform.position);
 
         // =========================
-        // 攻击范围内：只触发攻击动画
-        // 命中/结算完全交给动画事件：
-        //   AnimEvent_AttackStart / AnimEvent_AttackHit / AnimEvent_AttackEnd
+        // Aggro 逻辑（解法二）
+        // - 未锁定：只有进入 chaseRange 才锁定
+        // - 已锁定：一直追（可选：超出 loseAggroRange 才丢失）
         // =========================
-        if (dis <= attackRange)
+        // ===== Aggro（靠近触发 + 锁定）=====
+        if (!hasAggro)
         {
-            StopMove();
+            // 玩家第一次进入追击范围 => 锁定
+            if (dis <= chaseRange)
+                hasAggro = true;
+        }
+        else
+        {
+            // 默认不丢失仇恨（如果你想丢失，再用 loseAggroRange）
+            if (loseAggroRange > 0f && dis >= loseAggroRange)
+                hasAggro = false;
+        }
+
+
+        // =========================
+        // 攻击（有仇恨且在攻击范围）
+        // =========================
+        if (hasAggro && dis <= attackRange)
+        {
+            StopMove(clearPath: false); // ✅ 只停，不清路
             FaceTarget(target.transform.position);
 
             if (Time.time - lastAttackTime >= attackCD)
             {
                 if (animator != null) animator.SetTrigger(attackTrigger);
                 lastAttackTime = Time.time;
-
-                // ⚠️ 不建议在这里直接 attackArmed=true（容易和动画不同步）
-                // attackArmed = true;  // 改为由 AnimEvent_AttackStart 开启
+                // attackArmed 由动画事件 AttackStart 开启
             }
 
             UpdateMoveAnim();
@@ -130,58 +162,79 @@ public class EnemyController : MonoBehaviour
         }
 
         // =========================
-        // 追击范围：跑向玩家（并且面向玩家）
+        // 追击（有仇恨就追）
         // =========================
-        if (dis <= chaseRange)
+        if (hasAggro)
         {
-            if (agent != null && agent.enabled)
-            {
-                agent.isStopped = false;
-
-                // 更稳：目的地采样到 NavMesh
-                if (NavMesh.SamplePosition(target.transform.position, out var hit, 2f, NavMesh.AllAreas))
-                    agent.SetDestination(hit.position);
-                else
-                    agent.SetDestination(target.transform.position);
-            }
-
+            ChaseTarget();
             FaceTarget(target.transform.position);
             UpdateMoveAnim();
             return;
         }
 
         // =========================
-        // 超出范围：停止
+        // 没仇恨：停
         // =========================
-        StopMove();
+        StopMove(clearPath: false);
         UpdateMoveAnim();
     }
 
     // =========================================================
-    // ✅ Animation Events（强烈推荐你在攻击动画里加）
+    // 追击逻辑（更稳 + 不每帧重算）
     // =========================================================
+    private void ChaseTarget()
+    {
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
 
-    // ✅ 攻击开始帧：建议在抬手/出招起始那一帧加事件
+        agent.isStopped = false;
+
+        // 节流：避免每帧 SetDestination
+        if (Time.time < nextRepathTime) return;
+        nextRepathTime = Time.time + repathInterval;
+
+        Vector3 desired = target.transform.position;
+
+        // 目标变化很小就不重设
+        Vector3 flatDelta = desired - lastChaseGoal;
+        flatDelta.y = 0;
+        if (flatDelta.sqrMagnitude < goalChangeThreshold * goalChangeThreshold && agent.hasPath)
+            return;
+
+        // 采样到 NavMesh 上
+        if (NavMesh.SamplePosition(desired, out var hit, 10f, NavMesh.AllAreas))
+        {
+            lastChaseGoal = hit.position;
+            agent.SetDestination(hit.position);
+        }
+        else
+        {
+            // 采样不到目标附近网格时：不要直接给玩家原点（容易 PathInvalid）
+            // 没路才兜底到自己附近可走点
+            if (!agent.hasPath && NavMesh.SamplePosition(transform.position, out var hit2, 10f, NavMesh.AllAreas))
+            {
+                lastChaseGoal = hit2.position;
+                agent.SetDestination(hit2.position);
+            }
+        }
+    }
+
+    // =========================================================
+    // Animation Events
+    // =========================================================
     public void AnimEvent_AttackStart()
     {
         if (isDead) return;
         attackArmed = true;
     }
 
-    // ✅ 命中帧：挥到人的那一下
     public void AnimEvent_AttackHit()
     {
-        // Debug：你需要时可以打开
-        // Debug.Log($"[Enemy] AnimEvent_AttackHit fired on {name}, attackArmed={attackArmed}");
-
         if (isDead) return;
-        if (!attackArmed) return; // 没开窗就不结算
+        if (!attackArmed) return;
         if (target == null || target.isDead) return;
 
-        // 命中后立刻关闭，防止同一攻击多次触发
-        attackArmed = false;
+        attackArmed = false; // 防止同一次攻击多次结算
 
-        // 可选：面向判定（避免背对也打到）
         if (requireFacing)
         {
             Vector3 toPlayer = target.transform.position - transform.position;
@@ -202,7 +255,6 @@ public class EnemyController : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(center, hitRadius, playerLayer, QueryTriggerInteraction.Ignore);
         if (cols == null || cols.Length == 0) return;
 
-        // 保险：确保确实是当前 target（避免同 layer 其他东西误伤）
         for (int i = 0; i < cols.Length; i++)
         {
             if (cols[i] == null) continue;
@@ -215,13 +267,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // ✅ 攻击结束帧（可选）：在动画最后一帧加，保险清理
     public void AnimEvent_AttackEnd()
     {
         attackArmed = false;
     }
 
-    // ✅ 兼容旧动画事件名（你之前报错的 NormalHit）
     public void AnimEvent_NormalHit()
     {
         AnimEvent_AttackHit();
@@ -235,8 +285,10 @@ public class EnemyController : MonoBehaviour
         if (isDead) return;
 
         HP -= damage;
-
         if (animator != null) animator.SetTrigger(hitTrigger);
+
+        // 被打也算“激怒”
+        hasAggro = true;
 
         if (HP <= 0)
             Die();
@@ -247,10 +299,11 @@ public class EnemyController : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+        hasAggro = false;
 
         if (animator != null) animator.SetBool(deadBool, true);
 
-        StopMove();
+        StopMove(clearPath: true);
         TryDropHealthPack();
 
         if (agent != null) agent.enabled = false;
@@ -270,12 +323,14 @@ public class EnemyController : MonoBehaviour
     // =========================================================
     // Helpers
     // =========================================================
-    private void StopMove()
+    private void StopMove(bool clearPath)
     {
         if (agent == null || !agent.enabled) return;
 
         agent.isStopped = true;
-        agent.ResetPath();
+
+        if (clearPath)
+            agent.ResetPath();
     }
 
     private void UpdateMoveAnim()
@@ -312,6 +367,7 @@ public class EnemyController : MonoBehaviour
         if (go == null) return;
 
         target = go.GetComponent<PlayerController>();
+        AutoFixPlayerLayerMaskIfNeeded();
     }
 
     private void EnsureOnNavMesh()
@@ -320,19 +376,19 @@ public class EnemyController : MonoBehaviour
 
         if (!agent.isOnNavMesh)
         {
-            if (NavMesh.SamplePosition(transform.position, out var hit, 5f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(transform.position, out var hit, 30f, NavMesh.AllAreas))
             {
                 agent.Warp(hit.position);
+                agent.ResetPath();
+                agent.isStopped = false;
             }
         }
     }
 
-    // ✅ 如果 LayerMask 没配（value==0），尝试自动推断 Player Layer
     private void AutoFixPlayerLayerMaskIfNeeded()
     {
         if (playerLayer.value != 0) return;
 
-        // 优先从 target 的 Layer 推断
         if (target != null)
         {
             int layer = target.gameObject.layer;
@@ -343,7 +399,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // 否则尝试按名字找 Layer
         int playerLayerIndex = LayerMask.NameToLayer("Player");
         if (playerLayerIndex >= 0)
         {
@@ -351,12 +406,49 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // ================= Debug GUI (可选) =================
+    void LateUpdate()
+    {
+        if (!showDebugGUI) return;
+
+        if (agent == null) { _dbg = "agent = null"; return; }
+
+        if (Time.time > _dbgNext)
+        {
+            _dbgNext = Time.time + 0.5f;
+
+            string t = target ? target.name : "null";
+            float dis = target ? Vector3.Distance(transform.position, target.transform.position) : -1f;
+
+            string state =
+                (target == null || target.isDead) ? "NO TARGET" :
+                (!hasAggro) ? "IDLE" :
+                (dis <= attackRange) ? "ATTACK" :
+                "CHASE";
+
+            _dbg =
+                $"STATE={state}  aggro={hasAggro}\n" +
+                $"t={t} dis={dis:F2}\n" +
+                $"attackRange={attackRange:F2} chaseRange={chaseRange:F2} loseAggroRange={loseAggroRange:F2}\n" +
+                $"onNavMesh={agent.isOnNavMesh} enabled={agent.enabled}\n" +
+                $"stopped={agent.isStopped} speed={agent.speed:F2}\n" +
+                $"hasPath={agent.hasPath} pathStatus={agent.pathStatus}\n" +
+                $"remain={agent.remainingDistance:F2} vel={agent.velocity.magnitude:F2}";
+        }
+    }
+
+    void OnGUI()
+    {
+        if (!showDebugGUI) return;
+
+        GUI.color = Color.white;
+        GUI.Box(new Rect(8, 8, 560, 190), "");
+        GUI.Label(new Rect(16, 16, 540, 170), _dbg);
+    }
+
     void OnDrawGizmosSelected()
     {
         Transform o = attackOrigin != null ? attackOrigin : transform;
-        Gizmos.DrawWireSphere(
-            o.position + transform.forward * hitForwardOffset,
-            hitRadius
-        );
+        Gizmos.DrawWireSphere(o.position + transform.forward * hitForwardOffset, hitRadius);
     }
 }

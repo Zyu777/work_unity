@@ -1284,11 +1284,13 @@ MonoBehaviour:
   target: {fileID: 0}
   playerTag: Player
   retargetInterval: 1
-  HP: 10
+  HP: 8
   isDead: 0
-  chaseRange: 15
+  chaseRange: 20
   attackRange: 2
-  attackCD: 3
+  hasAggro: 0
+  loseAggroRange: 0
+  attackCD: 4
   damageToPlayer: 2
   attackOrigin: {fileID: 0}
   hitRadius: 0.6
@@ -1303,9 +1305,12 @@ MonoBehaviour:
   deadBool: Dead
   moveYParam: MoveY
   moveStateParam: MoveState
-  healthPackPrefab: {fileID: 0}
-  dropChance: 0.796
+  healthPackPrefab: {fileID: 3973452233575575987, guid: b9d04caf34f1dd94aae1484b5a386c81, type: 3}
+  dropChance: 0.7
   dropOffset: {x: 0, y: 0.2, z: 0}
+  repathInterval: 0.15
+  goalChangeThreshold: 0.25
+  showDebugGUI: 0
 --- !u!136 &4007962801830036035
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1363,15 +1368,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed384c1ec039cdd499c6f6a539e0ecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 8162665981605741575}
+  agent: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 8795875123774252534, guid: 1d43f10f6722e034085a3427a396b750, type: 3}
   playerTag: Player
   retargetInterval: 1
   HP: 10
   isDead: 0
-  chaseRange: 15
+  chaseRange: 20
   attackRange: 2
+  hasAggro: 0
+  loseAggroRange: 0
   attackCD: 3
   damageToPlayer: 2
   attackOrigin: {fileID: 0}
@@ -1387,9 +1394,12 @@ MonoBehaviour:
   deadBool: Dead
   moveYParam: MoveY
   moveStateParam: MoveState
-  healthPackPrefab: {fileID: 0}
-  dropChance: 1
+  healthPackPrefab: {fileID: 3973452233575575987, guid: b9d04caf34f1dd94aae1484b5a386c81, type: 3}
+  dropChance: 0.75
   dropOffset: {x: 0, y: 0.2, z: 0}
+  repathInterval: 0.15
+  goalChangeThreshold: 0.25
+  showDebugGUI: 0
 --- !u!114 &-7136748163148678211
 MonoBehaviour:
   m_ObjectHideFlags: 0
