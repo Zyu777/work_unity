@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!1 &907949993
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +507,128 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1119478812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119478816}
+  - component: {fileID: 1119478815}
+  - component: {fileID: 1119478814}
+  - component: {fileID: 1119478813}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1119478813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119478812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 800
+  offsetY: -35
+--- !u!114 &1119478814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119478812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: 7777
+  DualMode: 1
+  NoDelay: 1
+  Interval: 10
+  Timeout: 10000
+  RecvBufferSize: 7361536
+  SendBufferSize: 7361536
+  FastResend: 2
+  ReceiveWindowSize: 4096
+  SendWindowSize: 4096
+  MaxRetransmit: 40
+  MaximizeSocketBuffers: 1
+  ReliableMaxMessageSize: 297433
+  UnreliableMaxMessageSize: 1194
+  debugLog: 0
+  statisticsGUI: 0
+  statisticsLog: 0
+--- !u!114 &1119478815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119478812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  headlessStartMode: 0
+  editorAutoStart: 0
+  sendRate: 60
+  offlineScene: Assets/Scenes/start.unity
+  onlineScene: Assets/Scenes/GameScene.unity
+  offlineSceneLoadDelay: 0
+  transport: {fileID: 0}
+  networkAddress: localhost
+  maxConnections: 100
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 6146427091240311270, guid: c2dc2d7d49b001847b3cbd2ad0f568c8, type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  exceptionsDisconnect: 1
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    bufferLimit: 32
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
+  evaluationMethod: 0
+  evaluationInterval: 3
+  timeInterpolationGui: 0
+--- !u!4 &1119478816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119478812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -133.39505, y: 5.139762, z: -23.771729}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212224718
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +948,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 700576004}
+  - {fileID: 2047156029}
   - {fileID: 2137645361}
   - {fileID: 145776817}
   - {fileID: 1212224719}
@@ -985,6 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!114 &1692507097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,6 +1122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!114 &1692507098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,6 +1135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!114 &1692507099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!1 &2047156028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,11 +1182,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1692507093}
-  m_Father: {fileID: 2137645361}
+  m_Father: {fileID: 1448456038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000027537, y: 84}
+  m_AnchoredPosition: {x: 0.000027537, y: -7.9999847}
   m_SizeDelta: {x: 219.8947, y: 53.956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047156030
@@ -1107,7 +1235,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2047156033}
         m_TargetAssemblyTypeName: GameStartButton, Assembly-CSharp
-        m_MethodName: OnStartGameClicked
+        m_MethodName: OnSinglePlayerStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1164,9 +1292,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2047156028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b8e4409d1636e340b3cae2b763cbc4e, type: 3}
+  m_Script: {fileID: 11500000, guid: e101f263b7b83294296bcb8e4e0af2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: GameScene
 --- !u!1 &2057482617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1463,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2057482618}
-  - {fileID: 2047156029}
   m_Father: {fileID: 1448456038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1457,3 +1585,4 @@ SceneRoots:
   - {fileID: 907949995}
   - {fileID: 1448456038}
   - {fileID: 454402583}
+  - {fileID: 1119478816}
